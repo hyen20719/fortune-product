@@ -4,8 +4,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    margin: 0;
+    min-height: 100vh;
+    padding: 2rem 0;
 }
 
 .container {
@@ -14,45 +14,117 @@ body {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     text-align: center;
+    width: 90%;
+    max-width: 500px;
 }
 
 h1 {
     color: #333;
 }
 
+h2 {
+    text-align: left;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+}
+
+#fortune-form {
+    margin-top: 2rem;
+    text-align: left;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 1rem;
+    align-items: center;
+}
+
+.form-grid label {
+    font-weight: bold;
+}
+
+.form-grid input[type="text"],
+.form-grid input[type="date"],
+.form-grid select {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.time-container, .gender-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
 button {
     background-color: #007bff;
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 12px 20px;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 1rem;
-    margin-top: 1rem;
+    font-size: 1.1rem;
+    margin-top: 1.5rem;
+    width: 100%;
 }
 
 button:hover {
     background-color: #0056b3;
 }
 
-#fortune-form {
-    margin-top: 2rem;
-}
-
-#fortune-form input {
-    padding: 10px;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-right: 10px;
+button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
 }
 
 #fortune-result {
     margin-top: 2rem;
-    padding: 1.5rem;
-    background-color: #e8f5e9;
-    border: 1px solid #c8e6c9;
+    text-align: left;
+}
+
+.score-container {
+    background-color: #e9f5ff;
+    border: 1px solid #b3e5fc;
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.score-title {
+    font-size: 1rem;
+    color: #0277bd;
+}
+
+#fortune-score {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #01579b;
+    margin: 0.5rem 0;
+}
+
+#fortune-keywords {
+    font-size: 0.9rem;
+    color: #4a4a4a;
+}
+
+#fortune-result p {
+    background-color: #f7f7f7;
+    padding: 1rem;
     border-radius: 5px;
+    line-height: 1.6;
 }
 
 .hidden {
