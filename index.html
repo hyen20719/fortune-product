@@ -8,20 +8,20 @@
 </head>
 <body>
     <div class="container">
-        <h1>오늘의 운세</h1>
-        <p>당신의 사주 정보를 입력하고 오늘을 점쳐보세요!</p>
+        <h1>✨ 오늘의 운세 ✨</h1>
+        <p>평범한 하루도 특별하게! 당신의 사주팔자를 분석하여 오늘의 운세를 살짝 엿볼 수 있어요.</p>
         
         <div id="about-saju" class="info-section">
-            <h2>사주란 무엇인가요?</h2>
-            <p>사주는 개개인의 타고난 운명과 운의 흐름을 분석하는 동양의 전통적인 학문입니다. 태어난 해, 월, 일, 시 네 가지 기둥(四柱)을 통해 인생의 길흉화복을 예측하고, 현재의 운세와 미래의 방향을 제시합니다.</p>
-            <p>이 웹사이트는 여러분의 사주 정보를 바탕으로 오늘의 운세 점수와 함께 개인화된 조언을 제공합니다. 깊이 있는 이해를 돕기 위해 사주 데이터를 기반으로 한 키워드와 총운, 그리고 오늘 하루를 현명하게 보낼 수 있는 조언을 드립니다.</p>
-            <p>정확한 결과를 위해 생년월일과 태어난 시간을 정확하게 입력해주세요. 시간을 모를 경우 '시간 모름'을 선택하시면 됩니다.</p>
+            <h2>사주? 그거 꽤 흥미로운 이야기!</h2>
+            <p>안녕하세요! 사주는 태어난 연월일시, 이 네 가지 기둥(四柱)으로 당신의 운명 스토리를 들여다보는 동양의 지혜랍니다. 마치 나만의 비밀 코드를 해독하듯이, 타고난 기질과 운의 흐름을 알아보는 재미가 쏠쏠하죠.</p>
+            <p>저희 운세 연구소에서는 여러분의 소중한 사주 정보를 바탕으로 오늘 하루를 위한 맞춤형 운세 점수와 명쾌한 조언을 드려요. 복잡한 사주풀이 대신, 핵심 키워드와 함께 재치 있는 총운, 그리고 당신의 오늘을 반짝이게 할 특별한 조언까지!</p>
+            <p>정확한 운세는 정확한 정보에서 시작해요. 그러니 생년월일과 태어난 시간을 꼼꼼하게 입력해 주시겠어요? 혹시 태어난 시간을 모르신다면, 걱정 마세요! '시간 모름'을 체크해 주시면 된답니다. 그럼, 당신의 빛나는 하루를 함께 점쳐볼까요?</p>
         </div>
 
         <div id="fortune-form">
             <div class="form-grid">
                 <label for="user-name">이름</label>
-                <input type="text" id="user-name" placeholder="이름" autocomplete="off">
+                <input type="text" id="user-name" placeholder="소중한 당신의 이름을 알려주세요" autocomplete="off">
 
                 <label for="birth-date">생년월일</label>
                 <input type="date" id="birth-date">
@@ -33,19 +33,19 @@
                     </select>
                     <div class="checkbox-container">
                         <input type="checkbox" id="time-unknown">
-                        <label for="time-unknown">시간 모름</label>
+                        <label for="time-unknown">시간을 모르겠어요</label>
                     </div>
                 </div>
 
                 <label>성별</label>
                 <div class="gender-container">
                     <input type="radio" id="gender-male" name="gender" value="male">
-                    <label for="gender-male">남자</label>
+                    <label for="gender-male">남자분</label>
                     <input type="radio" id="gender-female" name="gender" value="female">
-                    <label for="gender-female">여자</label>
+                    <label for="gender-female">여자분</label>
                 </div>
             </div>
-            <button id="view-result-button" disabled>결과보기</button>
+            <button id="view-result-button" disabled>궁금한 오늘 운세 확인하기!</button>
         </div>
 
         <div id="fortune-result" class="hidden">

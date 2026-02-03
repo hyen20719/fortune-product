@@ -1,51 +1,66 @@
 body {
-    font-family: 'pretendard', sans-serif;
-    background-color: #f0f0f0;
+    font-family: 'Pretendard', 'Nanum Gothic', sans-serif; /* Added Nanum Gothic as fallback */
+    background-color: #f4f7f6; /* Lighter, trendier background */
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     padding: 2rem 0;
+    margin: 0;
 }
 
 .container {
-    background-color: white;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    background-color: #ffffff;
+    padding: 2.5rem; /* Slightly more padding */
+    border-radius: 15px; /* More rounded corners */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08); /* Softer, larger shadow */
     text-align: center;
     width: 90%;
-    max-width: 500px;
+    max-width: 550px; /* Slightly wider */
 }
 
 h1 {
     color: #333;
+    font-size: 2.2rem; /* Larger heading */
+    margin-bottom: 1rem;
+    position: relative; /* For potential pseudo-elements */
+}
+
+h1::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background-color: #6a82fb; /* Accent color */
+    margin: 10px auto 0;
+    border-radius: 2px;
 }
 
 h2 {
     text-align: left;
-    margin-top: 1.5rem;
-    margin-bottom: 0.5rem;
-    font-size: 1.2rem;
+    margin-top: 2rem; /* More spacing */
+    margin-bottom: 0.8rem;
+    font-size: 1.3rem;
+    color: #444;
 }
 
 .info-section {
-    background-color: #f9f9f9;
-    border: 1px solid #eee;
-    border-radius: 8px;
-    padding: 1.5rem;
-    margin-top: 1.5rem;
+    background-color: #f0f8ff; /* Light blue tint */
+    border: 1px solid #c0e0f8; /* Matching border */
+    border-radius: 10px;
+    padding: 1.8rem;
+    margin-top: 2rem;
     text-align: left;
-    line-height: 1.6;
+    line-height: 1.7;
     color: #555;
 }
 
 .info-section h2 {
     text-align: center;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     color: #333;
     margin-top: 0;
-    margin-bottom: 1rem;
+    margin-bottom: 1.2rem;
 }
 
 .info-section p {
@@ -53,122 +68,149 @@ h2 {
 }
 
 #fortune-form {
-    margin-top: 2rem;
-    text-align: left;
-}
-
-footer {
     margin-top: 2.5rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid #eee;
-    font-size: 0.8rem;
-    color: #777;
-}
-
-footer p {
-    margin: 0.5rem 0;
-}
-
-footer a {
-    color: #777;
-    text-decoration: none;
-}
-
-footer a:hover {
-    text-decoration: underline;
+    text-align: left;
 }
 
 .form-grid {
     display: grid;
     grid-template-columns: 1fr 2fr;
-    gap: 1rem;
+    gap: 1.2rem; /* More spacing */
     align-items: center;
 }
 
 .form-grid label {
-    font-weight: bold;
+    font-weight: 600; /* Bolder */
+    color: #333;
 }
 
 .form-grid input[type="text"],
 .form-grid input[type="date"],
 .form-grid select {
-    padding: 10px;
+    padding: 12px; /* More padding */
     font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    border: 1px solid #dcdcdc; /* Lighter border */
+    border-radius: 8px; /* More rounded */
     width: 100%;
     box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+.form-grid input[type="text"]:focus,
+.form-grid input[type="date"]:focus,
+.form-grid select:focus {
+    border-color: #6a82fb; /* Focus color */
+    outline: none;
 }
 
 .time-container, .gender-container {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 15px; /* More spacing */
 }
 
 .checkbox-container {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 8px;
+    font-weight: normal; /* Override bold from form-grid label */
 }
 
 button {
-    background-color: #007bff;
+    background-image: linear-gradient(to right, #6a82fb, #fc5c7d); /* Gradient button */
     color: white;
     border: none;
-    padding: 12px 20px;
-    border-radius: 5px;
+    padding: 14px 25px; /* More padding */
+    border-radius: 25px; /* Pill shape */
     cursor: pointer;
-    font-size: 1.1rem;
-    margin-top: 1.5rem;
+    font-size: 1.15rem;
+    font-weight: bold;
+    margin-top: 2rem; /* More margin */
     width: 100%;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
 button:hover {
-    background-color: #0056b3;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    transform: translateY(-2px);
 }
 
 button:disabled {
+    background-image: none; /* Remove gradient when disabled */
     background-color: #cccccc;
+    box-shadow: none;
     cursor: not-allowed;
+    transform: translateY(0);
 }
 
 #fortune-result {
-    margin-top: 2rem;
+    margin-top: 2.5rem;
     text-align: left;
 }
 
 .score-container {
-    background-color: #e9f5ff;
-    border: 1px solid #b3e5fc;
-    border-radius: 8px;
-    padding: 1rem;
+    background-color: #fff3e0; /* Warm background */
+    border: 1px solid #ffcc80; /* Matching border */
+    border-radius: 10px;
+    padding: 1.5rem;
     text-align: center;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.8rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
 .score-title {
-    font-size: 1rem;
-    color: #0277bd;
+    font-size: 1.1rem;
+    color: #e65100; /* Orange color */
+    font-weight: 600;
 }
 
 #fortune-score {
-    font-size: 3rem;
-    font-weight: bold;
-    color: #01579b;
-    margin: 0.5rem 0;
+    font-size: 3.5rem; /* Larger score */
+    font-weight: 800; /* Extra bold */
+    color: #d84315; /* Darker orange */
+    margin: 0.8rem 0;
+    line-height: 1;
 }
 
 #fortune-keywords {
-    font-size: 0.9rem;
-    color: #4a4a4a;
+    font-size: 1rem;
+    color: #795548; /* Earthy brown */
+    font-weight: 500;
+    margin-top: 0.5rem;
 }
 
 #fortune-result p {
-    background-color: #f7f7f7;
-    padding: 1rem;
-    border-radius: 5px;
-    line-height: 1.6;
+    background-color: #f7f9fc; /* Very light blue-gray */
+    padding: 1.2rem;
+    border-radius: 8px;
+    line-height: 1.8; /* More readable line height */
+    font-size: 1.05rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid #e0e7ee;
+}
+
+footer {
+    margin-top: 3rem; /* More margin */
+    padding-top: 2rem;
+    border-top: 1px solid #e5e5e5; /* Lighter border */
+    font-size: 0.85rem;
+    color: #999;
+}
+
+footer p {
+    margin: 0.6rem 0;
+}
+
+footer a {
+    color: #999;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+footer a:hover {
+    color: #6a82fb; /* Accent color on hover */
+    text-decoration: underline;
 }
 
 .hidden {

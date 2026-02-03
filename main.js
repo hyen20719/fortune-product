@@ -24,15 +24,18 @@ document.addEventListener('DOMContentLoaded', () => {
         birthTime.add(option);
     }
 
-    const formElements = [userName, birthDate, birthTime, genderMale, genderFemale];
+    const formElements = [userName, birthDate, birthTime]; // Exclude radio buttons from 'input' loop
 
     // --- Event Listeners ---
 
-    // Validate form on input change
+    // Validate form on input change for text, date, select
     formElements.forEach(el => {
         el.addEventListener('input', validateForm);
     });
+    // Validate form on change for time unknown checkbox and gender radio buttons
     timeUnknown.addEventListener('change', validateForm);
+    genderMale.addEventListener('change', validateForm);
+    genderFemale.addEventListener('change', validateForm);
 
     // Handle "Time Unknown" checkbox
     timeUnknown.addEventListener('change', () => {
@@ -106,18 +109,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Select Fortunes
         const totals = [
-            '하늘의 기운이 당신과 함께하니, 무엇을 하든 만사형통입니다. 자신감을 가지고 나아가세요.',
-            '물 흐르듯 순탄한 하루가 예상됩니다. 작은 성과에 연연하지 말고 큰 그림을 보세요.',
-            '예상치 못한 귀인이 나타나 도움을 줄 수 있습니다. 주변 사람들에게 항상 감사한 마음을 가지세요.',
-            '노력한 만큼의 결실을 맺는 날입니다. 꾸준함이 빛을 발할 것입니다.',
-            '변화의 기로에 서 있습니다. 신중한 선택이 미래의 큰 복을 불러올 것입니다.'
+            '오호! 오늘은 마치 주인공처럼 스포트라이트를 받는 날이 되겠어요. 당신의 매력이 폴폴 풍겨 주변 사람들을 사로잡을 예감! 😉',
+            '걱정은 잠시 내려놓으셔도 좋아요. 오늘은 물 흐르듯 잔잔하고 평화로운 하루가 당신을 기다리고 있답니다. 😌',
+            '두둥! 예상치 못한 행운의 바람이 살랑~ 불어올 거예요. 작은 변화에도 귀 기울여보세요. 🍀',
+            '오늘은 당신의 노력이 빛을 발하는 날! 그동안 갈고닦았던 실력을 마음껏 뽐내보시는 건 어떨까요? ✨',
+            '새로운 인연과의 즐거운 만남이 기대되는군요. 혹시 아나요? 당신의 특별한 연결고리가 될지! 🤝'
         ];
         const advices = [
-            '말 한마디에 천 냥 빚을 갚는다는 것을 기억하세요. 긍정적이고 따뜻한 말을 사용하는 것이 좋습니다.',
-            '과감한 도전보다는 안정을 추구하는 것이 유리한 날입니다. 현재의 것을 잘 지키세요.',
-            '혼자 해결하기 어려운 문제는 주변에 도움을 청하세요. 협력을 통해 더 큰 시너지를 낼 수 있습니다.',
-            '건강을 돌보는 것이 무엇보다 중요합니다. 가벼운 산책이나 스트레칭으로 몸과 마음을 챙기세요.',
-            '새로운 것을 배우기에 아주 좋은 날입니다. 지적 호기심을 마음껏 펼쳐보세요.'
+            '꿀팁 하나 드릴까요? 오늘은 당신의 미소 한 스푼이 만능 해결사가 될 거예요. 활짝 웃어보세요! 😊',
+            '가끔은 잠시 멈춰 서서 나 자신을 돌보는 시간이 필요해요. 좋아하는 차 한 잔과 함께 여유를 즐겨보세요. ☕',
+            '고민이 있다면 혼자 끙끙 앓지 마세요. 믿음직한 친구나 동료에게 살짝 기대보는 것도 좋은 방법이랍니다. 🫂',
+            '건강이 최고! 오늘은 가볍게 스트레칭하며 몸을 깨우거나, 신선한 공기를 마시러 산책을 나서보는 건 어떨까요? 🚶‍♀️',
+            '지루한 일상에 재미를 더해줄 무언가를 찾아보세요. 새로운 취미나 흥미로운 책 한 권이 당신을 기다려요! 📚'
         ];
 
         return {
