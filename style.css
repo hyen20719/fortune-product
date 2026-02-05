@@ -150,7 +150,7 @@ body::after {
 /* ===== 헤더 ===== */
 .main-header {
     text-align: center;
-    padding: var(--spacing-xl) 0;
+    padding: var(--spacing-lg) 0 var(--spacing-md);
 }
 
 .logo {
@@ -228,64 +228,87 @@ body::after {
     color: var(--text-secondary);
 }
 
-/* ===== 소개 섹션 ===== */
-.intro-card {
-    background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(236, 72, 153, 0.05) 100%);
-    border: 1px solid rgba(99, 102, 241, 0.15);
+/* ===== 티저 섹션 ===== */
+.teaser-card {
+    background: var(--gradient-primary);
+    border: none;
+    color: white;
+    position: relative;
+    overflow: hidden;
 }
 
-.intro-content {
+.teaser-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -30%;
+    width: 60%;
+    height: 150%;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.teaser-content {
     text-align: center;
+    position: relative;
+    z-index: 1;
 }
 
-.intro-content h2 {
-    font-family: 'Noto Serif KR', serif;
-    font-size: 1.3rem;
+.teaser-badge {
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-xl);
+    font-size: 0.8rem;
     font-weight: 600;
-    color: var(--text-primary);
     margin-bottom: var(--spacing-sm);
+    backdrop-filter: blur(4px);
 }
 
-.intro-content > p {
+.teaser-content h2 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: var(--spacing-sm);
+    line-height: 1.5;
+}
+
+.teaser-content > p {
     font-size: 0.95rem;
-    color: var(--text-secondary);
-    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.7;
     margin-bottom: var(--spacing-lg);
 }
 
-.intro-features {
+.teaser-content strong {
+    color: white;
+    font-weight: 600;
+}
+
+.teaser-stats {
     display: flex;
     justify-content: center;
-    gap: var(--spacing-md);
+    gap: var(--spacing-lg);
     flex-wrap: wrap;
 }
 
-.feature {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--spacing-xs);
-    padding: var(--spacing-sm) var(--spacing-md);
-    background: var(--bg-white);
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-sm);
-    min-width: 120px;
+.stat-item {
+    text-align: center;
 }
 
-.feature-icon {
+.stat-number {
+    display: block;
     font-family: 'Noto Serif KR', serif;
     font-size: 1.8rem;
     font-weight: 700;
-    background: var(--gradient-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: white;
 }
 
-.feature-text {
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: var(--text-secondary);
+.stat-label {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.8);
 }
 
 /* ===== 정보 섹션 ===== */
@@ -364,8 +387,7 @@ body::after {
     gap: var(--spacing-sm);
 }
 
-input[type="text"],
-select {
+input[type="text"] {
     width: 100%;
     padding: 0.95rem 1.1rem;
     font-size: 1rem;
@@ -375,8 +397,19 @@ select {
     border-radius: var(--radius-sm);
     color: var(--text-primary);
     transition: var(--transition-fast);
-    appearance: none;
-    -webkit-appearance: none;
+}
+
+select {
+    width: 100%;
+    padding: 0.95rem 1.1rem;
+    font-size: 1rem;
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: var(--bg-secondary);
+    border: 2px solid transparent;
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    transition: var(--transition-fast);
+    cursor: pointer;
 }
 
 input[type="text"]:hover,
@@ -396,12 +429,8 @@ input[type="text"]::placeholder {
     color: var(--text-muted);
 }
 
-select {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236366F1' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 1rem center;
-    padding-right: 2.5rem;
-    cursor: pointer;
+select::-ms-expand {
+    display: block;
 }
 
 select option {
@@ -1095,15 +1124,31 @@ select option {
 
     .logo {
         flex-direction: column;
-        gap: var(--spacing-sm);
+        gap: var(--spacing-xs);
     }
 
     .logo-icon {
-        font-size: 2.8rem;
+        font-size: 2.5rem;
     }
 
     .logo-text h1 {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
+    }
+
+    .main-header {
+        padding: var(--spacing-md) 0;
+    }
+
+    .teaser-content h2 {
+        font-size: 1.2rem;
+    }
+
+    .teaser-stats {
+        gap: var(--spacing-md);
+    }
+
+    .stat-number {
+        font-size: 1.5rem;
     }
 
     .form-row {
