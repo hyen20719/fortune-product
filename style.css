@@ -88,7 +88,7 @@ body {
     width: 100%;
     height: 100%;
     pointer-events: none;
-    z-index: 0;
+    z-index: -1;
     overflow: hidden;
 }
 
@@ -120,7 +120,7 @@ body::before {
     height: 80%;
     background: radial-gradient(circle, rgba(99, 102, 241, 0.06) 0%, transparent 70%);
     pointer-events: none;
-    z-index: 0;
+    z-index: -1;
 }
 
 body::after {
@@ -132,7 +132,7 @@ body::after {
     height: 60%;
     background: radial-gradient(circle, rgba(245, 158, 11, 0.05) 0%, transparent 70%);
     pointer-events: none;
-    z-index: 0;
+    z-index: -1;
 }
 
 /* ===== 앱 컨테이너 ===== */
@@ -358,6 +358,8 @@ body::after {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-xs);
+    position: relative;
+    z-index: 5;
 }
 
 .form-group label {
@@ -397,6 +399,8 @@ input[type="text"] {
     border-radius: var(--radius-sm);
     color: var(--text-primary);
     transition: var(--transition-fast);
+    position: relative;
+    z-index: 10;
 }
 
 select {
@@ -410,6 +414,8 @@ select {
     color: var(--text-primary);
     transition: var(--transition-fast);
     cursor: pointer;
+    position: relative;
+    z-index: 10;
 }
 
 input[type="text"]:hover,
