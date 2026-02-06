@@ -345,19 +345,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function calculateDayPillar(year, month, day) {
-        // 기준일: 1900년 1월 1일 = 갑술일 (甲戌)
-        // JDN(1900-01-01) = 2415021, 육십갑자 인덱스 = (2415021+49)%60 = 10
-        // 천간: 10%10=0(甲), 지지: 10%12=10(戌)
-        const baseDate = new Date(1900, 0, 1);
-        const targetDate = new Date(year, month - 1, day);
-        const diffDays = Math.floor((targetDate - baseDate) / (1000 * 60 * 60 * 24));
+        // JDN(Julian Day Number) 공식으로 일주 계산
+        // JavaScript Date 객체의 시간대/DST 문제를 완전히 제거
+        const a = Math.floor((14 - month) / 12);
+        const y = year + 4800 - a;
+        const m = month + 12 * a - 3;
+        const jdn = day + Math.floor((153 * m + 2) / 5) + 365 * y
+            + Math.floor(y / 4) - Math.floor(y / 100) + Math.floor(y / 400) - 32045;
 
-        // 1900-01-01은 갑술일(甲戌) → 보정값 10
-        const correction = 10;
-        const adjustedDiff = diffDays + correction;
-
-        const cheonganIndex = ((adjustedDiff % 10) + 10) % 10;
-        const jijiIndex = ((adjustedDiff % 12) + 12) % 12;
+        // 육십갑자 인덱스: (JDN + 49) % 60
+        const idx = (jdn + 49) % 60;
+        const cheonganIndex = idx % 10;
+        const jijiIndex = idx % 12;
 
         return {
             cheongan: cheonganIndex,
