@@ -296,18 +296,46 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     }
 
+    // 절기 기준 월지 결정 (각 월을 시작하는 절기의 대략적 양력 날짜)
+    function getSajuMonthJiji(month, day) {
+        const boundaries = [
+            { month: 1, day: 6, jiji: 1 },    // 소한 → 축월
+            { month: 2, day: 4, jiji: 2 },    // 입춘 → 인월
+            { month: 3, day: 6, jiji: 3 },    // 경칩 → 묘월
+            { month: 4, day: 5, jiji: 4 },    // 청명 → 진월
+            { month: 5, day: 6, jiji: 5 },    // 입하 → 사월
+            { month: 6, day: 6, jiji: 6 },    // 망종 → 오월
+            { month: 7, day: 7, jiji: 7 },    // 소서 → 미월
+            { month: 8, day: 8, jiji: 8 },    // 입추 → 신월
+            { month: 9, day: 8, jiji: 9 },    // 백로 → 유월
+            { month: 10, day: 8, jiji: 10 },   // 한로 → 술월
+            { month: 11, day: 7, jiji: 11 },   // 입동 → 해월
+            { month: 12, day: 7, jiji: 0 },    // 대설 → 자월
+        ];
+
+        let jiji = 0; // 기본값: 자월 (대설 이후 ~ 소한 이전)
+        for (let i = boundaries.length - 1; i >= 0; i--) {
+            const b = boundaries[i];
+            if (month > b.month || (month === b.month && day >= b.day)) {
+                jiji = b.jiji;
+                break;
+            }
+        }
+        return jiji;
+    }
+
     function calculateMonthPillar(year, month, day) {
         // 년간에 따른 월간 계산 (년상기월법)
         const yearPillar = calculateYearPillar(year, month, day);
         const yearCheongan = yearPillar.cheongan;
 
-        // 월지: 1월=축(1), 2월=인(2), ..., 11월=해(11), 12월=자(0)
-        const monthJiji = month % 12;
+        // 절기 기준 월지
+        const monthJiji = getSajuMonthJiji(month, day);
 
         // 월간: 인월(2월)의 천간 기준값 = (년간 % 5) * 2 + 2
         // 각 월은 인월로부터의 오프셋만큼 증가
         const inwolBase = ((yearCheongan % 5) * 2 + 2) % 10;
-        const monthOffset = ((month - 2) + 12) % 12;
+        const monthOffset = ((monthJiji - 2) + 12) % 12;
         const monthCheongan = (inwolBase + monthOffset) % 10;
 
         return {
