@@ -277,10 +277,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ===== 사주 계산 함수들 =====
 
-    function calculateYearPillar(year) {
+    function calculateYearPillar(year, month, day) {
+        // 입춘(약 2월 4일) 이전 출생은 전년도로 계산
+        let adjustedYear = year;
+        if (month === 1 || (month === 2 && day < 4)) {
+            adjustedYear = year - 1;
+        }
+
         // 갑자년(1864년)을 기준으로 계산
         const baseYear = 1864;
-        const diff = year - baseYear;
+        const diff = adjustedYear - baseYear;
         const cheonganIndex = ((diff % 10) + 10) % 10;
         const jijiIndex = ((diff % 12) + 12) % 12;
 
@@ -290,17 +296,19 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     }
 
-    function calculateMonthPillar(year, month) {
-        // 년간에 따른 월간 계산
-        const yearPillar = calculateYearPillar(year);
+    function calculateMonthPillar(year, month, day) {
+        // 년간에 따른 월간 계산 (년상기월법)
+        const yearPillar = calculateYearPillar(year, month, day);
         const yearCheongan = yearPillar.cheongan;
 
-        // 월지는 인월(1월)부터 시작
-        const monthJiji = (month + 1) % 12;
+        // 월지: 1월=축(1), 2월=인(2), ..., 11월=해(11), 12월=자(0)
+        const monthJiji = month % 12;
 
-        // 년간에 따른 월간 계산 공식
-        const monthCheonganBase = (yearCheongan % 5) * 2;
-        const monthCheongan = (monthCheonganBase + month - 1) % 10;
+        // 월간: 인월(2월)의 천간 기준값 = (년간 % 5) * 2 + 2
+        // 각 월은 인월로부터의 오프셋만큼 증가
+        const inwolBase = ((yearCheongan % 5) * 2 + 2) % 10;
+        const monthOffset = ((month - 2) + 12) % 12;
+        const monthCheongan = (inwolBase + monthOffset) % 10;
 
         return {
             cheongan: monthCheongan,
@@ -309,13 +317,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function calculateDayPillar(year, month, day) {
-        // 기준일: 1900년 1월 1일 = 갑자일
+        // 기준일: 1900년 1월 1일 = 갑술일 (甲戌)
+        // JDN(1900-01-01) = 2415021, 육십갑자 인덱스 = (2415021+49)%60 = 10
+        // 천간: 10%10=0(甲), 지지: 10%12=10(戌)
         const baseDate = new Date(1900, 0, 1);
         const targetDate = new Date(year, month - 1, day);
         const diffDays = Math.floor((targetDate - baseDate) / (1000 * 60 * 60 * 24));
 
-        // 1900년 1월 1일은 갑자일이 아니므로 보정 필요 (실제로는 경자일)
-        const correction = 36; // 갑자일까지의 보정값
+        // 1900-01-01은 갑술일(甲戌) → 보정값 10
+        const correction = 10;
         const adjustedDiff = diffDays + correction;
 
         const cheonganIndex = ((adjustedDiff % 10) + 10) % 10;
@@ -327,13 +337,9 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     }
 
-    function calculateHourPillar(dayCheongan, hour) {
-        // 시지 계산
-        let hourJiji;
-        if (hour === 23 || hour === 0) hourJiji = 0;
-        else hourJiji = Math.floor((hour + 1) / 2);
-
-        // 일간에 따른 시간 계산
+    function calculateHourPillar(dayCheongan, hourJiji) {
+        // 일상기시법(日上起時法)에 따른 시간 계산
+        // 시간은 지지 인덱스(0=자시, 1=축시, ..., 11=해시)로 직접 전달
         const hourCheonganBase = (dayCheongan % 5) * 2;
         const hourCheongan = (hourCheonganBase + hourJiji) % 10;
 
@@ -416,10 +422,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const calendarType = document.querySelector('input[name="calendar"]:checked').value;
 
         // 사주 팔자 계산
-        const yearPillar = calculateYearPillar(year);
-        const monthPillar = calculateMonthPillar(year, month);
+        const yearPillar = calculateYearPillar(year, month, day);
+        const monthPillar = calculateMonthPillar(year, month, day);
         const dayPillar = calculateDayPillar(year, month, day);
-        const hourPillar = hour !== null ? calculateHourPillar(dayPillar.cheongan, hour * 2) : null;
+        const hourPillar = hour !== null ? calculateHourPillar(dayPillar.cheongan, hour) : null;
 
         // 일주 문자열
         const ilju = CHEONGAN[dayPillar.cheongan] + JIJI[dayPillar.jiji];
